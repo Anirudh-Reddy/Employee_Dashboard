@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit {
     const selectedEmpData = this.employeeForm.getRawValue().selectedEmployee;
     if(!selectedEmpData) return;
 
-    window.localStorage.setItem("selected-emp",JSON.stringify(selectedEmpData));
+    localStorage.setItem("selected-emp",JSON.stringify(selectedEmpData));
     this.utilService.setSelectedEmpData(selectedEmpData)
     this.router.navigate(['employeeInfo'])
   } 

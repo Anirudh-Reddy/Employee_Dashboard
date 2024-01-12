@@ -16,7 +16,7 @@ export class UtilService {
     if(Object.keys(this.selectedEmployee).length){
       return this.selectedEmployee;
     }else{
-      const data:any = window.localStorage.getItem("selected-emp")
+      const data:any = typeof window !== 'undefined' ? localStorage.getItem("selected-emp") : null
       return JSON.parse(data);
     }  
   }
@@ -29,7 +29,7 @@ export class UtilService {
     if(Object.keys(this.employeeDocs).length){
       return this.employeeDocs;
     }else{
-      const data:any = localStorage.getItem("emp-docs")
+      const data:any = typeof window !== 'undefined' ? localStorage.getItem("emp-docs") : null
       return JSON.parse(data);
     }
   }
