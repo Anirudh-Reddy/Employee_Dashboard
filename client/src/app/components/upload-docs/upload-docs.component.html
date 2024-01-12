@@ -1,0 +1,95 @@
+<div class="uploadDocs">
+    <p-toast></p-toast>
+    <button class="back_btn" (click)="onBackClick()"><span class="pi pi-arrow-left" style="color: #ffffff"></span></button>
+    <div class="uploadDocs_container">
+        <!-- <div class="uploadDocs_prereq">
+            <p>Upload the documents with filenames formatted as <b>'filename_filetype.fileextension'</b>, where the filetype is determined by the type of document.</p>
+            <p>For instance, if the document is a passport, the filename should be <b>'filename_passport.fileextension'</b>."</p>
+        </div> -->
+        <p-accordion [multiple]="true" [activeIndex]="[0]">
+            <p-accordionTab header="Visa">
+                <button pButton [pTooltip]="tooltipContent1" tooltipPosition="right" label="">Documents that can be uploaded</button>
+                <ng-template #tooltipContent1>
+                    <div class="flex align-items-center">
+                        <ul>
+                            <li>Green Card</li>
+                            <li>H1B Document</li>
+                            <li>I140 Document</li>
+                            <li>I94 Document</li>
+                            <li>I20 Document</li>
+                            <li>EAD Card</li>
+                        </ul>
+                    </div>
+                </ng-template>
+                <div class="doc1">
+                    <input type="file" (change)="onFileChange($event,'Visa')" multiple />
+                    <div class="uploaded_files">
+                        <ul>
+                            <li *ngFor="let visaFile of selectedFiles['Visa']">{{visaFile}}</li>
+                        </ul>
+                    </div>
+                </div>                
+            </p-accordionTab>
+            <p-accordionTab header="Identity Proofs">
+                <button pButton [pTooltip]="tooltipContent2" tooltipPosition="right" label="">Documents that can be uploaded</button>
+                <ng-template #tooltipContent2>
+                    <div class="flex align-items-center">
+                        <ul>
+                            <li>Passport</li>
+                            <li>Driving Licence</li>
+                        </ul>
+                    </div>
+                </ng-template>
+                <div class="doc1">
+                    <input type="file" (change)="onFileChange($event,'IDs')" multiple />
+                    <div class="uploaded_files">
+                        <ul>
+                            <li *ngFor="let visaFile of selectedFiles['IDs']">{{visaFile}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab header="Transcripts">
+                <button pButton [pTooltip]="tooltipContent3" tooltipPosition="right" label="">Documents that can be uploaded</button>
+                <ng-template #tooltipContent3>
+                    <div class="flex align-items-center">
+                        <ul>
+                            <li>Transcript 1</li>
+                            <li>Transcript 2</li>
+                            <li>Transcript 3</li>
+                        </ul>
+                    </div>
+                </ng-template>
+                <div class="doc1">
+                    <input type="file" (change)="onFileChange($event,'Transcripts')" multiple />
+                    <div class="uploaded_files">
+                        <ul>
+                            <li *ngFor="let visaFile of selectedFiles['Transcripts']">{{visaFile}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </p-accordionTab>
+            <p-accordionTab header="Payslips">
+                <button pButton [pTooltip]="tooltipContent4" tooltipPosition="right" label="">Documents that can be uploaded</button>
+                <ng-template #tooltipContent4>
+                    <div class="flex align-items-center">
+                        <ul>
+                            <li>Payslip 1</li>
+                            <li>Payslip 2</li>
+                            <li>Payslip 3</li>
+                        </ul>
+                    </div>
+                </ng-template>
+                <div class="doc1">
+                    <input type="file" (change)="onFileChange($event,'Payslips')" multiple />
+                    <div class="uploaded_files">
+                        <ul>
+                            <li *ngFor="let visaFile of selectedFiles['Payslips']">{{visaFile}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </p-accordionTab>
+        </p-accordion>
+        <div class="uploadDocs_submit_btn"><p-button [disabled]="submitFlag" (click)="onSubmit()">Submit</p-button></div>
+    </div>
+</div>

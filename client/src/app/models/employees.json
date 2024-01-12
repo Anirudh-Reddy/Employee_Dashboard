@@ -1,0 +1,203 @@
+[
+    {
+      "id": 1,
+      "employeeName": "John Doe",
+      "age": 28,
+      "DOB": "1994-05-15",
+      "email": "john.doe@example.com",
+      "firstName": "John",
+      "lastName": "Doe",
+      "phoneNumber": "1234567890",
+      "position": "Software Developer",
+      "address": "123 Main Street, Cityville",
+      "experience": 3,
+      "documentsList":["Visa","Transcripts","IDs","Payslips"],
+      "documents":{
+            "visa":[],
+            "Transcripts":[],
+            "IDs":[],
+            "Payslips":[]
+      }
+    },
+    {
+      "id": 2,
+      "employeeName": "Jane Smith",
+      "age": 32,
+      "DOB": "1990-08-25",
+      "email": "jane.smith@example.com",
+      "firstName": "Jane",
+      "lastName": "Smith",
+      "phoneNumber": "9876543210",
+      "position": "UX Designer",
+      "address": "456 Oak Avenue, Townsville",
+      "experience": 5,
+      "documentsList":["Visa","Transcripts","IDs","Payslips"],
+      "documents":{
+            "visa":[],
+            "Transcripts":[],
+            "IDs":[],
+            "Payslips":[]
+      }
+    },
+    {
+      "id": 3,
+      "employeeName": "Bob Johnson",
+      "age": 35,
+      "DOB": "1987-11-10",
+      "email": "bob.johnson@example.com",
+      "firstName": "Bob",
+      "lastName": "Johnson",
+      "phoneNumber": "4567890123",
+      "position": "Project Manager",
+      "address": "789 Pine Lane, Villageton",
+      "experience": 8,
+      "documentsList":["Visa","Transcripts","IDs","Payslips"],
+      "documents":{
+            "visa":[],
+            "Transcripts":[],
+            "IDs":[],
+            "Payslips":[]
+      }
+    },
+    {
+      "id": 4,
+      "employeeName": "Alice Williams",
+      "age": 26,
+      "DOB": "1996-03-18",
+      "email": "alice.williams@example.com",
+      "firstName": "Alice",
+      "lastName": "Williams",
+      "phoneNumber": "8765432109",
+      "position": "Marketing Specialist",
+      "address": "234 Cedar Road, Hamletville",
+      "experience": 2,
+      "documentsList":["Visa","Transcripts","IDs","Payslips"],
+      "documents":{
+            "visa":[],
+            "Transcripts":[],
+            "IDs":[],
+            "Payslips":[]
+      }
+    },
+    {
+      "id": 5,
+      "employeeName": "David Brown",
+      "age": 30,
+      "DOB": "1992-07-05",
+      "email": "david.brown@example.com",
+      "firstName": "David",
+      "lastName": "Brown",
+      "phoneNumber": "5432109876",
+      "position": "Data Analyst",
+      "address": "567 Birch Street, Suburbia",
+      "experience": 4,
+      "documentsList":["Visa","Transcripts","IDs","Payslips"],
+      "documents":{
+            "visa":[],
+            "Transcripts":[],
+            "IDs":[],
+            "Payslips":[]
+      }
+    },
+    {
+      "id": 6,
+      "employeeName": "Eva Miller",
+      "age": 29,
+      "DOB": "1993-09-12",
+      "email": "eva.miller@example.com",
+      "firstName": "Eva",
+      "lastName": "Miller",
+      "phoneNumber": "2109876543",
+      "position": "HR Specialist",
+      "address": "890 Maple Court, Districtton",
+      "experience": 6,
+      "documentsList":["Visa","Transcripts","IDs","Payslips"],
+      "documents":{
+            "visa":[],
+            "Transcripts":[],
+            "IDs":[],
+            "Payslips":[]
+      }
+    },
+    {
+      "id": 7,
+      "employeeName": "George Taylor",
+      "age": 31,
+      "DOB": "1991-12-28",
+      "email": "george.taylor@example.com",
+      "firstName": "George",
+      "lastName": "Taylor",
+      "phoneNumber": "1098765432",
+      "position": "Sales Representative",
+      "address": "345 Elm Square, Boroughburg",
+      "experience": 7,
+      "documentsList":["Visa","Transcripts","IDs","Payslips"],
+      "documents":{
+            "visa":[],
+            "Transcripts":[],
+            "IDs":[],
+            "Payslips":[]
+      }
+    },
+    {
+      "id": 8,
+      "employeeName": "Hannah Anderson",
+      "age": 33,
+      "DOB": "1989-06-08",
+      "email": "hannah.anderson@example.com",
+      "firstName": "Hannah",
+      "lastName": "Anderson",
+      "phoneNumber": "4321098765",
+      "position": "Financial Analyst",
+      "address": "678 Walnut Circle, Townberg",
+      "experience": 9,
+      "documentsList":["Visa","Transcripts","IDs","Payslips"],
+      "documents":{
+            "visa":[],
+            "Transcripts":[],
+            "IDs":[],
+            "Payslips":[]
+      }
+    },
+    {
+      "id": 9,
+      "employeeName": "Isaac Hall",
+      "age": 27,
+      "DOB": "1995-02-20",
+      "email": "isaac.hall@example.com",
+      "firstName": "Isaac",
+      "lastName": "Hall",
+      "phoneNumber": "3210987654",
+      "position": "Quality Assurance Engineer",
+      "address": "901 Oak Plaza, Villagetown",
+      "experience": 3,
+      "documentsList":["Visa","Transcripts","IDs","Payslips"],
+      "documents":{
+            "visa":[],
+            "Transcripts":[],
+            "IDs":[],
+            "Payslips":[]
+      }
+    },
+    {
+      "id": 10,
+      "employeeName": "Jasmine Clark",
+      "age": 28,
+      "DOB": "1994-04-07",
+      "email": "jasmine.clark@example.com",
+      "firstName": "Jasmine",
+      "lastName": "Clark",
+      "phoneNumber": "8765432101",
+      "position": "Customer Support Specialist",
+      "address": "234 Pine Avenue, Citytown",
+      "experience": 4,
+      "documentsList":["Visa","Transcripts","IDs","Payslips"],
+      "documents":{
+            "visa":[],
+            "Transcripts":[],
+            "IDs":[],
+            "Payslips":[]
+      }
+    }
+  ]
+  

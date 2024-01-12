@@ -1,0 +1,14 @@
+<div class="home">
+    <div class="home_container">
+        <form class="home_form" [formGroup]="employeeForm">
+            <label for="float-label">Search Employee</label>
+            <p-autoComplete formControlName="selectedEmployee" 
+            [suggestions]="employeeList" inputId="float-label" placeholder="enter employee name"
+            (completeMethod)="filterEmployees($event)" field="employeeName">
+            </p-autoComplete>
+            <div class="home_search_btn">
+                <p-button label="Search" [disabled]="false" (click)="onSubmit()"></p-button>
+            </div>
+        </form>
+    </div>
+</div>

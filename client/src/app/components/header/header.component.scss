@@ -1,0 +1,28 @@
+.header{
+    width: 100%;
+    background-color: #ffffff;
+    height: 4rem;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    box-shadow: 0 3px 5px #00000005, 0 0 2px #0000000d, 0 1px 4px #00000014;
+    z-index: 999;
+    .header_left{
+        cursor: pointer;
+        img{
+            width: 100px;
+            height:2.5rem
+        }
+
+    }
+    .header_right{
+        span{
+            font-size: 18px;
+            font-weight: 700;
+            color: #0f508a;
+        }
+    }
+}

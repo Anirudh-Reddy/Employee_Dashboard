@@ -1,0 +1,36 @@
+<div class="emp_docs">
+    <div class="emp_container">
+        <div class="emp_card" (click)="handleDocs('Visa')">
+            <div class="emp_cardBox c1">
+                <p>Visa</p>
+            </div>
+        </div>
+        <div class="emp_card" (click)="handleDocs('IDs')">
+            <div class="emp_cardBox c2">
+                <p>Identity Proofs</p>
+            </div>
+        </div>
+        <div class="emp_card" (click)="handleDocs('Transcripts')">
+            <div class="emp_cardBox c3">
+                <p>Transcripts</p>
+            </div>
+        </div>
+        <div class="emp_card" (click)="handleDocs('Payslips')">
+            <div class="emp_cardBox c4">
+                <p>Payslips</p>
+            </div>
+        </div>
+        <button class="back_btn" (click)="onBackClick()"><span class="pi pi-arrow-left" style="color: #ffffff"></span></button>
+    </div>
+    <p-dialog [header]="documentType" [(visible)]="visible" [style]="{width: '70vw'}">
+        <div class="emp_docs_container" *ngIf="selectedDocs.length">
+            <a *ngFor="let files of selectedDocs" [href]="'http://localhost:3000/files/'+files.filename">
+                <img class="emp_docs_svg" src="../../../assets/images/doc_icon.png" alt="document Icon">
+                <span>{{files.originalname}}</span>
+            </a>
+        </div>
+        <div *ngIf="!selectedDocs.length">
+            <p>No Documents found.</p>
+        </div>
+    </p-dialog>
+</div>

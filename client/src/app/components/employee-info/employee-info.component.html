@@ -1,0 +1,52 @@
+<div class="empInfo">
+    <div class="empInfo_container">
+        <h2>Employee Details</h2>
+        <div class="empInfo_form" [formGroup]="employeeForm">
+            <div class="row r1">
+                <div class="inputflex">
+                    <label for="firstName">First Name:</label>
+                    <input type="text" id="firstName" formControlName="firstName" readonly />
+                </div>
+                <div class="inputflex">
+                    <label for="lastName">Last Name:</label>
+                    <input type="text" id="lastName" formControlName="lastName" readonly />      
+                </div>
+            </div>
+            <div class="row r2 inputflex">
+                <label for="email">Email:</label>
+                <input type="email" id="email" formControlName="email" readonly />
+            </div>
+            <div class="row r3">
+                <div class="inputflex">
+                    <label for="phoneNumber">Phone Number:</label>
+                    <input type="tel" id="phoneNumber" formControlName="phoneNumber" readonly />
+                </div>
+                <div class="inputflex">
+                    <label for="DOB">Date of Birth:</label>
+                    <input type="date" id="DOB" formControlName="DOB" readonly />
+                </div>
+            </div>
+            <div class="row r4 inputflex">
+                <label for="position">Position:</label>
+                <input type="text" id="position" formControlName="position" readonly />
+            </div>
+            <div class="row r5 inputflex">
+                <label for="address">Address:</label>
+                <input id="address" formControlName="address" readonly/>
+            </div>
+            <div class="row r6 inputflex">
+                <label for="exp">Years of Experience:</label>
+                <input type="text" id="exp" formControlName="experience" readonly />
+            </div>
+            <div class="empInfo_btns">
+                <div class="empInfo_upload_btn"><p-button label="Upload Documents" [disabled]="false" (click)="uploadDocs()"></p-button></div>
+                <div class="empInfo_openDocs_btn"><p-button label="Open Documents" [disabled]="false" (click)="openDocs()">
+                    </p-button></div>
+            </div>
+          </div>
+          <button class="back_btn" (click)="onBackClick()"><span class="pi pi-arrow-left" style="color: #ffffff"></span></button>
+    </div>
+    <div class="empInfo_spinner" *ngIf="isLoading">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
+</div>
