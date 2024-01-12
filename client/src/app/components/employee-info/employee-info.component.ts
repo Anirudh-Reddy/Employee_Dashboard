@@ -54,12 +54,12 @@ export class EmployeeInfoComponent implements OnInit{
       if(typeof window !== 'undefined'){
         localStorage.setItem("emp-docs",JSON.stringify(res.files));
       }
-      this.router.navigate(['employeeDocs']);
+      this.router.navigate(['employee-docs']);
     },(err)=>{
       this.isLoading = false;
       console.error(err);
       document.body.style.overflow = ""; 
-      this.router.navigate(['employeeDocs']);
+      this.router.navigate(['employee-docs']);
       if(typeof window !== 'undefined'){
         localStorage.setItem("emp-docs",JSON.stringify({}));
       }

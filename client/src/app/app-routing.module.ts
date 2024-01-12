@@ -8,7 +8,7 @@ import { UploadDocsComponent } from './components/upload-docs/upload-docs.compon
 const routes: Routes = [
   { path:'home' , component:HomeComponent},
   { path:'employeeInfo' , component:EmployeeInfoComponent},
-  { path:'employeeDocs' , component:EmployeeDocsComponent},
+  { path:'employee-docs' , component:EmployeeDocsComponent},
   { path:'uploadDocs' , component:UploadDocsComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];
