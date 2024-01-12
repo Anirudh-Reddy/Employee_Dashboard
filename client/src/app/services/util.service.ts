@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class UtilService {
   public selectedEmployee = {};
-  public employeeDocs = {};
+  public employeeDocsData = {};
   constructor() { }
 
   setSelectedEmpData(empObj:any){
@@ -22,12 +22,12 @@ export class UtilService {
   }
 
   setEmpDocs(docs:{}){
-    this.employeeDocs = docs;
+    this.employeeDocsData = docs;
   }
 
   getEmpDocs(){
-    if(Object.keys(this.employeeDocs).length){
-      return this.employeeDocs;
+    if(Object.keys(this.employeeDocsData).length){
+      return this.employeeDocsData;
     }else{
       const data:any = typeof window !== 'undefined' ? localStorage.getItem("emp-docs") : null
       return JSON.parse(data);

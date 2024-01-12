@@ -17,15 +17,12 @@ export class EmployeeDocsComponent implements OnInit{
 
   ngOnInit(): void {
     this.retrievedFiles = this.utilService.getEmpDocs();
-    console.log("selected item:",this.retrievedFiles)
   }
 
   handleDocs(docType:string){
     this.visible = true;
     this.selectedDocs = this.retrievedFiles[docType] ? this.retrievedFiles[docType] : [];
-    console.log('selc dcs :',this.selectedDocs)
     this.documentType = docType == "IDs" ? "Identity Proofs" : docType;
-    console.log(this.selectedDocs,docType);
 
   }
 
