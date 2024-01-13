@@ -81,3 +81,12 @@ label{
     top: 30%;
     right: 45%;
 }
+
+@media (max-width: 1024px) {
+    .empInfo{
+        width: 90%;
+        .empInfo_container{
+            width: 100%;
+        }
+    }
+}

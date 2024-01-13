@@ -24,6 +24,14 @@
                 margin-top: 1rem;
             }
         }
-        
+    }
+}
+
+@media (max-width: 1024px) {
+    .home{
+        width: 90%;
+        .home_container{
+            width: 100%;
+        }
     }
 }
