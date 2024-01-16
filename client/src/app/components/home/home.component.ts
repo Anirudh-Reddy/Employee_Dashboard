@@ -52,6 +52,7 @@ export class HomeComponent implements OnInit {
     this.fileUploadService.retrieveFiles(this.selectedEmployeeData.id).subscribe((res) => {
       console.log('Files retrieved successfully:', res);
       this.retrievedFiles = res.files;
+      this.utilService.isUpdated = true;
       this.isLoading = false;
       document.body.style.overflow = ""; 
       this.utilService.setEmpDocs(res.files);
@@ -59,16 +60,15 @@ export class HomeComponent implements OnInit {
         localStorage.setItem("emp-docs",JSON.stringify(res.files));
       }
       this.router.navigate(['employeeInfo']);
-      this.utilService.isUpdated = true;
     },(err)=>{
       this.isLoading = false;
       console.error(err);
       document.body.style.overflow = ""; 
       this.utilService.isUpdated = false;
-      this.router.navigate(['employeeInfo']);
       if(typeof window !== 'undefined'){
         localStorage.setItem("emp-docs",JSON.stringify({}));
       }
+      this.router.navigate(['employeeInfo']);
     })
   }
 
