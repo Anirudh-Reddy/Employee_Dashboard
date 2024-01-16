@@ -11,6 +11,7 @@ const routes: Routes = [
   { path:'employee-docs' , component:EmployeeDocsComponent},
   { path:'uploadDocs' , component:UploadDocsComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({

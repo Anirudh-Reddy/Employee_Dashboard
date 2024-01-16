@@ -1,12 +1,13 @@
 <div class="uploadDocs">
     <p-toast></p-toast>
+    <div class="uploadDocs_header">
+        <h3 class="uploadDocs_title">Upload Documents</h3>
+        <p-button label="Open Documents" [disabled]="false" (click)="openDocs()"></p-button>
+    </div>
+    
     <button class="back_btn" (click)="onBackClick()"><span class="pi pi-arrow-left" style="color: #ffffff"></span></button>
     <div class="uploadDocs_container">
-        <!-- <div class="uploadDocs_prereq">
-            <p>Upload the documents with filenames formatted as <b>'filename_filetype.fileextension'</b>, where the filetype is determined by the type of document.</p>
-            <p>For instance, if the document is a passport, the filename should be <b>'filename_passport.fileextension'</b>."</p>
-        </div> -->
-        <p-accordion [multiple]="true" [activeIndex]="[0]">
+        <p-accordion [multiple]="true">
             <p-accordionTab header="Visa">
                 <button pButton [pTooltip]="tooltipContent1" tooltipPosition="right" label="">Documents that can be uploaded</button>
                 <ng-template #tooltipContent1>
@@ -25,7 +26,7 @@
                     <input type="file" (change)="onFileChange($event,'Visa')" multiple />
                     <div class="uploaded_files">
                         <ul>
-                            <li *ngFor="let visaFile of selectedFiles['Visa']">{{visaFile}}</li>
+                            <li *ngFor="let Vfile of selectedEmpData?.documents?.['Visa']">{{Vfile.name || Vfile.originalname}}</li>
                         </ul>
                     </div>
                 </div>                
@@ -44,7 +45,7 @@
                     <input type="file" (change)="onFileChange($event,'IDs')" multiple />
                     <div class="uploaded_files">
                         <ul>
-                            <li *ngFor="let visaFile of selectedFiles['IDs']">{{visaFile}}</li>
+                            <li *ngFor="let IDfile of selectedEmpData?.documents?.['IDs']">{{IDfile.name || IDfile.originalname}}</li>
                         </ul>
                     </div>
                 </div>
@@ -64,7 +65,7 @@
                     <input type="file" (change)="onFileChange($event,'Transcripts')" multiple />
                     <div class="uploaded_files">
                         <ul>
-                            <li *ngFor="let visaFile of selectedFiles['Transcripts']">{{visaFile}}</li>
+                            <li *ngFor="let Tfile of selectedEmpData?.documents?.['Transcripts']">{{Tfile.name || Tfile.originalname}}</li>
                         </ul>
                     </div>
                 </div>
@@ -84,7 +85,7 @@
                     <input type="file" (change)="onFileChange($event,'Payslips')" multiple />
                     <div class="uploaded_files">
                         <ul>
-                            <li *ngFor="let visaFile of selectedFiles['Payslips']">{{visaFile}}</li>
+                            <li *ngFor="let Pfile of selectedEmpData?.documents?.['Payslips']">{{Pfile.name || Pfile.originalname}}</li>
                         </ul>
                     </div>
                 </div>

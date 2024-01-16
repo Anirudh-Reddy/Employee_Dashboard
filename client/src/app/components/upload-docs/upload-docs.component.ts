@@ -19,6 +19,14 @@ export class UploadDocsComponent implements OnInit{
     "Payslips" : []
   };
   public submitFlag:boolean=true;
+  public retrievedFiles:any;
+  public toUpdate:boolean=false;
+  public uploadedFileNames:any = {
+    "Visa" : [],
+    "Transcripts" : [],
+    "IDs" : [],
+    "Payslips" : []
+  };
   constructor(
     private messageService: MessageService, 
     private utilService:UtilService,
@@ -28,22 +36,28 @@ export class UploadDocsComponent implements OnInit{
   
   ngOnInit(): void {
     this.selectedEmpData = this.utilService.getSelectedEmpData();
-    }
+    this.retrievedFiles = Object.keys(this.utilService.getEmpDocs()).length ? this.utilService.getEmpDocs() : this.selectedFiles;
+    this.handleRetrievedFilesData();
+  }
+
+  handleRetrievedFilesData(){
+    Object.keys(this.selectedFiles).forEach(key=>{
+      if(this.retrievedFiles[key].length){
+        this.retrievedFiles[key].forEach((file:any)=>this.selectedEmpData.documents[key].push(file))
+      }
+    })
+  }
 
   onFileChange(event: any, fileType:string) {
     this.submitFlag = false;
     let file = event.target.files[0];
     let fileExists = this.uploadedFiles.find((eachFile:any)=>eachFile.name==file.name);
     if(!fileExists){
-      const docObj= {
-        name: file.name,
-        type: file.type,
-        "file_type": fileType
-    };
-      this.selectedFiles[fileType].push(event.target.files[0].name)
       this.uploadedFiles.push(file);
+      this.selectedFiles[fileType].push(event.target.files[0].name)
+      this.selectedEmpData.documents[fileType].push(event.target.files[0]);
     }else{
-      alert('file exists already ')
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'File Already Exists!!' });
     }
   }
 
@@ -57,12 +71,24 @@ export class UploadDocsComponent implements OnInit{
             formData.append("files",file);
     })
     formData.append("doc_files",JSON.stringify({userId:this.selectedEmpData.id, selectedFiles:this.selectedFiles}))
-    this.fileUploadService.uploadFiles(formData).subscribe((res) => {
-      console.log('Files uploaded successfully:', res);
-      this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Documents uploaded successfully!!' });
-      this.submitFlag = true;
-      setTimeout(()=>this.onBackClick(),1000);     
-    });
+    if(!this.utilService.isUpdated){
+      this.fileUploadService.uploadFiles(formData).subscribe((res) => {
+        console.log('Files uploaded successfully:', res);
+        this.utilService.isUpdated = true;
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Documents uploaded successfully!!' });
+        this.submitFlag = true;
+      });
+    }else{
+      this.fileUploadService.updateFiles(formData).subscribe((res) => {
+        console.log('Files updated successfully:', res);
+        this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Documents uploaded successfully!!' });
+        this.submitFlag = true;
+      });
+    }
+  }
+
+  openDocs(){
+    this.router.navigate(['employee-docs']);
   }
 
 }

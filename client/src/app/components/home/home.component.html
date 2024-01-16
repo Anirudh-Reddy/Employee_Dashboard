@@ -2,13 +2,16 @@
     <div class="home_container">
         <form class="home_form" [formGroup]="employeeForm">
             <label for="float-label">Search Employee</label>
-            <p-autoComplete formControlName="selectedEmployee" 
-            [suggestions]="employeeList" inputId="float-label" placeholder="enter employee name"
-            (completeMethod)="filterEmployees($event)" field="employeeName">
-            </p-autoComplete>
+            <p-autoComplete formControlName="selectedEmployee" inputId="float-label" placeholder="enter employee name"
+             [dropdown]="true" [suggestions]="employeeList" 
+            (completeMethod)="filterEmployees($event)" field="employeeName"></p-autoComplete>
+
             <div class="home_search_btn">
                 <p-button label="Search" [disabled]="false" (click)="onSubmit()"></p-button>
             </div>
         </form>
+        <div class="home_spinner" *ngIf="isLoading">
+            <p-progressSpinner></p-progressSpinner>
+        </div>
     </div>
 </div>

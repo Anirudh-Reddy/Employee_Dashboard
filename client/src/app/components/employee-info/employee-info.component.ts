@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { UtilService } from '../../services/util.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { FileUploadService } from '../../services/file-upload.service';
 
 @Component({
   selector: 'app-employee-info',
@@ -30,8 +29,7 @@ export class EmployeeInfoComponent implements OnInit{
   constructor(
     private utilService:UtilService,
     private fb: FormBuilder,
-    private router:Router,
-    private fileUploadService:FileUploadService){}
+    private router:Router){}
 
   ngOnInit(): void {
     this.selectedEmployeeData = this.utilService.getSelectedEmpData();
@@ -40,30 +38,6 @@ export class EmployeeInfoComponent implements OnInit{
 
   uploadDocs(){
     this.router.navigate(['uploadDocs']);
-  }
-  
-  openDocs(){
-    this.isLoading = true;
-    document.body.style.overflow = "hidden";
-    this.fileUploadService.retrieveFiles(this.selectedEmployeeData.id).subscribe((res) => {
-      console.log('Files retrieved successfully:', res);
-      this.retrievedFiles = res.files;
-      this.isLoading = false;
-      document.body.style.overflow = ""; 
-      this.utilService.setEmpDocs(res.files);
-      if(typeof window !== 'undefined'){
-        localStorage.setItem("emp-docs",JSON.stringify(res.files));
-      }
-      this.router.navigate(['employee-docs']);
-    },(err)=>{
-      this.isLoading = false;
-      console.error(err);
-      document.body.style.overflow = ""; 
-      this.router.navigate(['employee-docs']);
-      if(typeof window !== 'undefined'){
-        localStorage.setItem("emp-docs",JSON.stringify({}));
-      }
-    })
   }
 
   onBackClick(){

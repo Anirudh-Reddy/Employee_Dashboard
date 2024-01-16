@@ -1,4 +1,3 @@
-// fileUpload.model.js
 import mongoose from "mongoose";
 
 const fileUploadSchema = new mongoose.Schema({
@@ -9,6 +8,7 @@ const fileUploadSchema = new mongoose.Schema({
       IDs:{ type: Array},
       Payslips:{ type: Array},
     },
+    created : { type: Boolean},
     createdAt: { type: Date, default: Date.now },
 });
 

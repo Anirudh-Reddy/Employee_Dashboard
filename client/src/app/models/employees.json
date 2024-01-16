@@ -13,7 +13,7 @@
       "experience": 3,
       "documentsList":["Visa","Transcripts","IDs","Payslips"],
       "documents":{
-            "visa":[],
+            "Visa":[],
             "Transcripts":[],
             "IDs":[],
             "Payslips":[]
@@ -33,7 +33,7 @@
       "experience": 5,
       "documentsList":["Visa","Transcripts","IDs","Payslips"],
       "documents":{
-            "visa":[],
+            "Visa":[],
             "Transcripts":[],
             "IDs":[],
             "Payslips":[]
@@ -53,7 +53,7 @@
       "experience": 8,
       "documentsList":["Visa","Transcripts","IDs","Payslips"],
       "documents":{
-            "visa":[],
+            "Visa":[],
             "Transcripts":[],
             "IDs":[],
             "Payslips":[]
@@ -73,7 +73,7 @@
       "experience": 2,
       "documentsList":["Visa","Transcripts","IDs","Payslips"],
       "documents":{
-            "visa":[],
+            "Visa":[],
             "Transcripts":[],
             "IDs":[],
             "Payslips":[]
@@ -93,7 +93,7 @@
       "experience": 4,
       "documentsList":["Visa","Transcripts","IDs","Payslips"],
       "documents":{
-            "visa":[],
+            "Visa":[],
             "Transcripts":[],
             "IDs":[],
             "Payslips":[]
@@ -113,7 +113,7 @@
       "experience": 6,
       "documentsList":["Visa","Transcripts","IDs","Payslips"],
       "documents":{
-            "visa":[],
+            "Visa":[],
             "Transcripts":[],
             "IDs":[],
             "Payslips":[]
@@ -133,7 +133,7 @@
       "experience": 7,
       "documentsList":["Visa","Transcripts","IDs","Payslips"],
       "documents":{
-            "visa":[],
+            "Visa":[],
             "Transcripts":[],
             "IDs":[],
             "Payslips":[]
@@ -153,7 +153,7 @@
       "experience": 9,
       "documentsList":["Visa","Transcripts","IDs","Payslips"],
       "documents":{
-            "visa":[],
+            "Visa":[],
             "Transcripts":[],
             "IDs":[],
             "Payslips":[]
@@ -173,7 +173,7 @@
       "experience": 3,
       "documentsList":["Visa","Transcripts","IDs","Payslips"],
       "documents":{
-            "visa":[],
+            "Visa":[],
             "Transcripts":[],
             "IDs":[],
             "Payslips":[]
@@ -193,7 +193,7 @@
       "experience": 4,
       "documentsList":["Visa","Transcripts","IDs","Payslips"],
       "documents":{
-            "visa":[],
+            "Visa":[],
             "Transcripts":[],
             "IDs":[],
             "Payslips":[]

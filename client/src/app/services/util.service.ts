@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class UtilService {
   public selectedEmployee = {};
   public employeeDocsData = {};
+  public isUserUpdated:boolean=false;
   constructor() { }
 
   setSelectedEmpData(empObj:any){
@@ -32,5 +33,13 @@ export class UtilService {
       const data:any = typeof window !== 'undefined' ? localStorage.getItem("emp-docs") : null
       return JSON.parse(data);
     }
+  }
+
+  set isUpdated(val:boolean){
+    this.isUserUpdated = val;
+  }
+
+  get isUpdated(){
+    return this.isUserUpdated;
   }
 }
