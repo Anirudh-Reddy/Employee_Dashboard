@@ -27,6 +27,7 @@ export class UploadDocsComponent implements OnInit{
     "IDs" : [],
     "Payslips" : []
   };
+  public isLoading:boolean = false;
   constructor(
     private messageService: MessageService, 
     private utilService:UtilService,
@@ -38,12 +39,18 @@ export class UploadDocsComponent implements OnInit{
     this.selectedEmpData = this.utilService.getSelectedEmpData();
     this.retrievedFiles = Object.keys(this.utilService.getEmpDocs()).length ? this.utilService.getEmpDocs() : this.selectedFiles;
     this.handleRetrievedFilesData();
+    this.utilService.handleServiceCallObservable$.subscribe((res:boolean)=>{
+      this.isLoading = res;
+    })
   }
 
   handleRetrievedFilesData(){
     Object.keys(this.selectedFiles).forEach(key=>{
       if(this.retrievedFiles[key].length){
-        this.retrievedFiles[key].forEach((file:any)=>this.selectedEmpData.documents[key].push(file))
+        this.retrievedFiles[key].forEach((file:any)=>{
+          const filesExists = this.selectedEmpData.documents[key].find((fl:any)=>fl.originalname==file.originalname)
+          if(!filesExists) this.selectedEmpData.documents[key].push(file);
+        })
       }
     })
   }
@@ -70,7 +77,6 @@ export class UploadDocsComponent implements OnInit{
     this.uploadedFiles.forEach((file:any)=>{
             formData.append("files",file);
     })
-    debugger
     formData.append("doc_files",JSON.stringify({userId:this.selectedEmpData.id, selectedFiles:this.selectedFiles}))
     if(!this.utilService.isUpdated){
       this.fileUploadService.uploadFiles(formData).subscribe((res) => {
@@ -78,18 +84,19 @@ export class UploadDocsComponent implements OnInit{
         this.utilService.isUpdated = true;
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Documents uploaded successfully!!' });
         this.submitFlag = true;
+        window.scrollTo(0,0);
       });
     }else{
       this.fileUploadService.updateFiles(formData).subscribe((res) => {
         console.log('Files updated successfully:', res);
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Documents uploaded successfully!!' });
         this.submitFlag = true;
+        window.scrollTo(0,0);
       });
     }
   }
 
   openDocs(){
-    this.router.navigate(['employee-docs']);
+    this.utilService.handleFileRetrieving('employee-docs');
   }
-
 }

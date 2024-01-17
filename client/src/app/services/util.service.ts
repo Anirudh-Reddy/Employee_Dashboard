@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { FileUploadService } from './file-upload.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilService {
-  public selectedEmployee = {};
+  public selectedEmployee :any= {};
   public employeeDocsData = {};
   public isUserUpdated:boolean=false;
-  constructor() { }
+  private handleServiceCall$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false); 
+  public handleServiceCallObservable$: Observable<boolean> = this.handleServiceCall$.asObservable();
+  constructor(private router: Router, private fileUploadService : FileUploadService) { }
 
   setSelectedEmpData(empObj:any){
     this.selectedEmployee = empObj;
@@ -41,5 +46,33 @@ export class UtilService {
 
   get isUpdated(){
     return this.isUserUpdated;
+  }
+
+  handleServiceCall(flag:boolean){
+    this.handleServiceCall$.next(flag);
+  }
+
+  handleFileRetrieving(routeVal:string){
+    document.body.style.overflow = "hidden";
+    this.fileUploadService.retrieveFiles(this.selectedEmployee.id).subscribe((res) => {
+      console.log('Files retrieved successfully:', res);
+      this.isUpdated = res.created ? true : false;
+      document.body.style.overflow = "";
+      this.setEmpDocs(res.files);
+      if(typeof window !== 'undefined'){
+        localStorage.setItem("emp-docs",JSON.stringify(res.files));
+      }
+      this.handleServiceCall(false);
+      this.router.navigate([routeVal]);
+    },(err)=>{
+      console.error(err);
+      document.body.style.overflow = ""; 
+      this.isUpdated = false;
+      if(typeof window !== 'undefined'){
+        localStorage.setItem("emp-docs",JSON.stringify({}));
+      }
+      this.handleServiceCall(false);
+      this.router.navigate([routeVal]);
+    })
   }
 }

@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import uploadRoute from './routes/file_upload.routes.js';
+import userRoute from './routes/user.routes.js';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -19,6 +20,8 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/uploadFiles',uploadRoute);
+
+app.use('/users',userRoute)
 
 app.listen(3000,()=>{
     console.log("Server started at port : 3000");

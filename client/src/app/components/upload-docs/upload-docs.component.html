@@ -4,12 +4,16 @@
         <h3 class="uploadDocs_title">Upload Documents</h3>
         <p-button label="Open Documents" [disabled]="false" (click)="openDocs()"></p-button>
     </div>
-    
+    <div class="uploadDocs_spinner" *ngIf="isLoading">
+        <p-progressSpinner></p-progressSpinner>
+    </div>
     <button class="back_btn" (click)="onBackClick()"><span class="pi pi-arrow-left" style="color: #ffffff"></span></button>
     <div class="uploadDocs_container">
         <p-accordion [multiple]="true">
             <p-accordionTab header="Visa">
-                <button pButton [pTooltip]="tooltipContent1" tooltipPosition="right" label="">Documents that can be uploaded</button>
+                <div class="uploadDocs_info_container">
+                    <span [pTooltip]="tooltipContent1" tooltipPosition="right" label="">Documents that can be uploaded <span class="pi pi-arrow-circle-right"></span></span>
+                </div>
                 <ng-template #tooltipContent1>
                     <div class="flex align-items-center">
                         <ul>
@@ -32,7 +36,9 @@
                 </div>                
             </p-accordionTab>
             <p-accordionTab header="Identity Proofs">
-                <button pButton [pTooltip]="tooltipContent2" tooltipPosition="right" label="">Documents that can be uploaded</button>
+                <div class="uploadDocs_info_container">
+                    <span [pTooltip]="tooltipContent2" tooltipPosition="right" label="">Documents that can be uploaded <span class="pi pi-arrow-circle-right"></span></span>
+                </div>
                 <ng-template #tooltipContent2>
                     <div class="flex align-items-center">
                         <ul>
@@ -51,7 +57,9 @@
                 </div>
             </p-accordionTab>
             <p-accordionTab header="Transcripts">
-                <button pButton [pTooltip]="tooltipContent3" tooltipPosition="right" label="">Documents that can be uploaded</button>
+                <div class="uploadDocs_info_container">
+                    <span [pTooltip]="tooltipContent3" tooltipPosition="right" label="">Documents that can be uploaded <span class="pi pi-arrow-circle-right"></span></span>
+                </div>
                 <ng-template #tooltipContent3>
                     <div class="flex align-items-center">
                         <ul>
@@ -71,7 +79,9 @@
                 </div>
             </p-accordionTab>
             <p-accordionTab header="Payslips">
-                <button pButton [pTooltip]="tooltipContent4" tooltipPosition="right" label="">Documents that can be uploaded</button>
+                <div class="uploadDocs_info_container">
+                    <span [pTooltip]="tooltipContent4" tooltipPosition="right" label="">Documents that can be uploaded <span class="pi pi-arrow-circle-right"></span></span>
+                </div>
                 <ng-template #tooltipContent4>
                     <div class="flex align-items-center">
                         <ul>

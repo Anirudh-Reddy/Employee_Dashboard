@@ -1,43 +1,70 @@
 <div class="empInfo">
     <p-toast></p-toast>
     <div class="empInfo_container">
-        <h2>Employee Details</h2>
+        <div class="empInfo_header">
+            <h2>Employee Details</h2>
+            <div class="empInfo_edit">
+                <p-button (click)="makeFormEditable()" [label]="formAction"><span *ngIf="!isFormEditable" class="pi pi-user-edit"></span></p-button>
+            </div>
+        </div>
+        
         <div class="empInfo_form" [formGroup]="employeeForm">
             <div class="row r1">
                 <div class="inputflex">
                     <label for="firstName">First Name:</label>
-                    <input type="text" id="firstName" formControlName="firstName" readonly />
+                    <input type="text" id="firstName" formControlName="firstName" [readonly]="!isFormEditable"/>
+                      <span class="form_error" *ngIf="employeeForm.get('firstName')?.hasError('required')">
+                        *First Name is required.
+                      </span>
+                      <span class="form_error" *ngIf="employeeForm.get('firstName')?.hasError('minlength')">
+                        *First Name must be at least 3 characters long.
+                      </span>
                 </div>
                 <div class="inputflex">
                     <label for="lastName">Last Name:</label>
-                    <input type="text" id="lastName" formControlName="lastName" readonly />      
+                    <input type="text" id="lastName" formControlName="lastName" [readonly]="!isFormEditable" />      
+                    <span class="form_error" *ngIf="employeeForm.get('lastName')?.hasError('required')">
+                        *Last Name is required.
+                      </span>
                 </div>
             </div>
             <div class="row r2 inputflex">
                 <label for="email">Email:</label>
-                <input type="email" id="email" formControlName="email" readonly />
+                <input type="email" id="email" formControlName="email" [readonly]="!isFormEditable" />
+                <span class="form_error" *ngIf="employeeForm.get('email')?.hasError('email') || employeeForm.get('email')?.hasError('required')">
+                    *Email is required".
+                </span>
             </div>
             <div class="row r3">
                 <div class="inputflex">
                     <label for="phoneNumber">Phone Number:</label>
-                    <input type="tel" id="phoneNumber" formControlName="phoneNumber" readonly />
+                    <input type="tel" id="phoneNumber" formControlName="phoneNumber" [readonly]="!isFormEditable" />
+                    <span class="form_error" *ngIf="employeeForm.get('phoneNumber')?.hasError('required')">
+                        *Phone number Name is required.
+                      </span>
+                      <span class="form_error" *ngIf="employeeForm.get('phoneNumber')?.hasError('pattern')">
+                        *Phone number should contain 10 digits.
+                      </span>
                 </div>
                 <div class="inputflex">
                     <label for="DOB">Date of Birth:</label>
-                    <input type="date" id="DOB" formControlName="DOB" readonly />
+                    <input type="date" id="DOB" formControlName="DOB" [readonly]="!isFormEditable" />
+                    <span class="form_error" *ngIf="employeeForm.get('DOB')?.hasError('required')">
+                        *Date od Birth is required.
+                    </span>
                 </div>
             </div>
             <div class="row r4 inputflex">
                 <label for="position">Position:</label>
-                <input type="text" id="position" formControlName="position" readonly />
+                <input type="text" id="position" formControlName="position" [readonly]="!isFormEditable" />
             </div>
             <div class="row r5 inputflex">
                 <label for="address">Address:</label>
-                <input id="address" formControlName="address" readonly/>
+                <input id="address" formControlName="address" [readonly]="!isFormEditable"/>
             </div>
             <div class="row r6 inputflex">
                 <label for="exp">Years of Experience:</label>
-                <input type="text" id="exp" formControlName="experience" readonly />
+                <input type="text" id="exp" formControlName="experience" [readonly]="!isFormEditable" />
             </div>
         </div>  
         <app-upload-docs></app-upload-docs>     

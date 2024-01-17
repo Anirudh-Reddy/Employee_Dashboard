@@ -108,3 +108,18 @@ input[type="file"] {
 .uploaded_files{
   width: 50%;
 }
+
+.uploadDocs_spinner{
+  position: fixed;
+  top: 30%;
+  right: 45%;
+}
+
+.pi-arrow-circle-right{
+  margin-left: 5px;
+}
+
+.uploadDocs_info_container{
+  display: flex;
+  align-items: center;
+}

@@ -17,7 +17,6 @@ const handleFileUpload=async(req,res)=>{
         const newUpload = await fileUploadModel.create({id: doc_files.userId,files: files, created: true});
         res.status(201).send(newUpload);
     }catch(error){
-        console.log('error here',error)
         res.status(500).json({message: error.message});
     } 
 }
@@ -31,7 +30,6 @@ const retrieveFiles = async (req, res) => {
         }
         res.status(200).json(fileData);
     } catch (error) {
-        console.log('Error:', error);
         res.status(500).json({ message: error.message });
     }
 };
@@ -60,10 +58,8 @@ const updateFiles = async (req,res)=>{
         console.log('updated val : ',user)
 
         const updateUser = await fileUploadModel.updateOne({ id : userId }, { files: user.files });
-        console.log('updateUser : ',updateUser)
         res.status(200).json({ id: user.id, message: 'file updated successfully' });
     } catch (error) {
-        console.log('Error:', error);
         res.status(500).json({ message: error.message });
     }
 }

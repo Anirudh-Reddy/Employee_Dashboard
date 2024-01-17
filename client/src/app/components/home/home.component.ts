@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import employeeStaticData from '../../models/employees.json';
-import { Router } from '@angular/router';
 import { UtilService } from '../../services/util.service';
-import { FileUploadService } from '../../services/file-upload.service';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-home',
@@ -17,20 +16,33 @@ export class HomeComponent implements OnInit {
     selectedEmployee :[""],
   });
 
-  employeeList: any[] = [];
+  public employeeList: any[] = [];
   public isLoading :boolean = false;
   public selectedEmployeeData:any={};
   public retrievedFiles:any
+  public documentObj = {
+    documentsList:["Visa","Transcripts","IDs","Payslips"],
+    documents:{
+            "Visa":[],
+            "Transcripts":[],
+            "IDs":[],
+            "Payslips":[]
+      }
+  }
 
   constructor(
      private fb: FormBuilder,
-     private router: Router,
      private utilService:UtilService,
-     private fileUploadService : FileUploadService
+     private userService:UserService
      ) {}
 
   ngOnInit() {
-    this.employees = employeeStaticData;
+    this.userService.getAllUsers().subscribe(res=>{
+      this.employees = res.map((emp:any)=>({...emp,...this.documentObj}));
+    })
+    this.utilService.handleServiceCallObservable$.subscribe((res:boolean)=>{
+      this.isLoading = res;
+    })
   }
 
   filterEmployees(event: any) {
@@ -39,37 +51,15 @@ export class HomeComponent implements OnInit {
 
   onSubmit(){
     this.selectedEmployeeData = this.employeeForm.getRawValue().selectedEmployee;
-    if(!this.selectedEmployeeData) return;
-
+    if(!this.selectedEmployeeData || !this.selectedEmployeeData.id) {
+      alert("Enter valid name"),
+      this.employeeForm.get('selectedEmployee')?.patchValue('');
+      return;
+    }
+    this.utilService.handleServiceCall(true);
     localStorage.setItem("selected-emp",JSON.stringify(this.selectedEmployeeData));
-    this.utilService.setSelectedEmpData(this.selectedEmployeeData)
-    this.handleEmployeeFilesData();
-  } 
-
-  handleEmployeeFilesData(){
-    this.isLoading = true;
-    document.body.style.overflow = "hidden";
-    this.fileUploadService.retrieveFiles(this.selectedEmployeeData.id).subscribe((res) => {
-      console.log('Files retrieved successfully:', res);
-      this.retrievedFiles = res.files;
-      this.utilService.isUpdated = res.created ? true : false;
-      this.isLoading = false;
-      document.body.style.overflow = "";
-      this.utilService.setEmpDocs(res.files);
-      if(typeof window !== 'undefined'){
-        localStorage.setItem("emp-docs",JSON.stringify(res.files));
-      }
-      this.router.navigate(['employeeInfo']);
-    },(err)=>{
-      this.isLoading = false;
-      console.error(err);
-      document.body.style.overflow = ""; 
-      this.utilService.isUpdated = false;
-      if(typeof window !== 'undefined'){
-        localStorage.setItem("emp-docs",JSON.stringify({}));
-      }
-      this.router.navigate(['employeeInfo']);
-    })
+    this.utilService.setSelectedEmpData(this.selectedEmployeeData);
+    this.utilService.handleFileRetrieving('employeeInfo');
   }
 
 }

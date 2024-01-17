@@ -13,9 +13,11 @@ export class EmployeeDocsComponent implements OnInit{
   public selectedDocs:any = [];
   public documentType:string = '';
   public retrievedFiles:any = {};
+  public selectedEmployeeData:any={};
   constructor(private utilService:UtilService,private router:Router, private fileUploadService: FileUploadService){}
 
   ngOnInit(): void {
+    this.selectedEmployeeData = this.utilService.getSelectedEmpData();
     this.retrievedFiles = this.utilService.getEmpDocs();
   }
 

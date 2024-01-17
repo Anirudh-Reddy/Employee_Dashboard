@@ -22,6 +22,7 @@ import { MessageService } from 'primeng/api';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { InputMaskModule } from 'primeng/inputmask';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     ToastModule,
     TooltipModule,
     DialogModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    InputMaskModule
   ],
   providers: [
     MessageService,
