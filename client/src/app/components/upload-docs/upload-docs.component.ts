@@ -47,8 +47,11 @@ export class UploadDocsComponent implements OnInit{
   handleRetrievedFilesData(){
     Object.keys(this.selectedFiles).forEach(key=>{
       if(this.retrievedFiles[key].length){
+        console.log('this.retrievedFiles : ',this.retrievedFiles)
+        console.log('this.selectedEmpData : ',this.selectedEmpData)
         this.retrievedFiles[key].forEach((file:any)=>{
-          const filesExists = this.selectedEmpData.documents[key].find((fl:any)=>fl.originalname==file.originalname)
+          debugger
+          const filesExists = this.selectedEmpData.documents[key].find((fl:any)=>fl.originalname || fl.name == file.originalname);
           if(!filesExists) this.selectedEmpData.documents[key].push(file);
         })
       }
