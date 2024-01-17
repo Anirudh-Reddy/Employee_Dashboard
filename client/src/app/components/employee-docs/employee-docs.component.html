@@ -28,7 +28,7 @@
     </div>
     <p-dialog [header]="documentType" [(visible)]="visible" [style]="{width: '70vw'}">
         <div class="emp_docs_container" *ngIf="selectedDocs.length">
-            <a *ngFor="let files of selectedDocs" [href]="'https://employee-dashboard-0msz.onrender.com/files/'+files.filename">
+            <a *ngFor="let files of selectedDocs" target="_blank" [href]="'https://employee-dashboard-0msz.onrender.com/files/'+files.filename">
                 <img class="emp_docs_svg" src="../../../assets/images/doc_icon.png" alt="document Icon">
                 <span>{{files.originalname}}</span>
             </a>
