@@ -52,9 +52,9 @@ export class HomeComponent implements OnInit {
     this.fileUploadService.retrieveFiles(this.selectedEmployeeData.id).subscribe((res) => {
       console.log('Files retrieved successfully:', res);
       this.retrievedFiles = res.files;
-      this.utilService.isUpdated = true;
+      this.utilService.isUpdated = res.created ? true : false;
       this.isLoading = false;
-      document.body.style.overflow = ""; 
+      document.body.style.overflow = "";
       this.utilService.setEmpDocs(res.files);
       if(typeof window !== 'undefined'){
         localStorage.setItem("emp-docs",JSON.stringify(res.files));

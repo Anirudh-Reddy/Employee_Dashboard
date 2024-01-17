@@ -27,12 +27,7 @@ const retrieveFiles = async (req, res) => {
         const fileId = req.params.id;
         const fileData = await fileUploadModel.findOne({ id: fileId });
         if (!fileData) {
-            return res.status(200).json({files:{
-                Visa: [],
-                Transcripts: [],
-                IDs: [],
-                Payslips: []
-            }});
+            return res.status(200).json({files:{Visa: [],Transcripts: [],IDs: [],Payslips: []},created: false});
         }
         res.status(200).json(fileData);
     } catch (error) {

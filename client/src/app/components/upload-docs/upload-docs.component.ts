@@ -70,6 +70,7 @@ export class UploadDocsComponent implements OnInit{
     this.uploadedFiles.forEach((file:any)=>{
             formData.append("files",file);
     })
+    debugger
     formData.append("doc_files",JSON.stringify({userId:this.selectedEmpData.id, selectedFiles:this.selectedFiles}))
     if(!this.utilService.isUpdated){
       this.fileUploadService.uploadFiles(formData).subscribe((res) => {
