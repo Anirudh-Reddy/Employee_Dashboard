@@ -4,9 +4,12 @@
         <h3 class="uploadDocs_title">Upload Documents</h3>
         <p-button label="Open Documents" [disabled]="false" (click)="openDocs()"></p-button>
     </div>
-    <div class="uploadDocs_spinner" *ngIf="isLoading">
-        <p-progressSpinner></p-progressSpinner>
+    <div class="overlay"  *ngIf="isLoading">
+        <div class="uploadDocs_spinner">
+            <p-progressSpinner></p-progressSpinner>
+        </div>
     </div>
+    
     <button class="back_btn" (click)="onBackClick()"><span class="pi pi-arrow-left" style="color: #ffffff"></span></button>
     <div class="uploadDocs_container">
         <p-accordion [multiple]="true">

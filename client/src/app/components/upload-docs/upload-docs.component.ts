@@ -79,6 +79,7 @@ export class UploadDocsComponent implements OnInit{
     this.uploadedFiles.forEach((file:any)=>{
             formData.append("files",file);
     })
+    this.utilService.handleServiceCall(true);
     formData.append("doc_files",JSON.stringify({userId:this.selectedEmpData.id, selectedFiles:this.selectedFiles}))
     if(!this.utilService.isUpdated){
       this.fileUploadService.uploadFiles(formData).subscribe((res) => {
@@ -86,14 +87,24 @@ export class UploadDocsComponent implements OnInit{
         this.utilService.isUpdated = true;
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Documents uploaded successfully!!' });
         this.submitFlag = true;
+        this.utilService.handleServiceCall(false);
         window.scrollTo(0,0);
+      },(err)=>{
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to upload files!!' });
+        this.uploadedFiles = []
+        this.utilService.handleServiceCall(false);
       });
     }else{
       this.fileUploadService.updateFiles(formData).subscribe((res) => {
         console.log('Files updated successfully:', res);
         this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Documents uploaded successfully!!' });
         this.submitFlag = true;
+        this.utilService.handleServiceCall(false);
         window.scrollTo(0,0);
+      },(err)=>{
+        this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to update files!!' });
+        this.uploadedFiles = []
+        this.utilService.handleServiceCall(false);
       });
     }
     this.isDocsUploaded = true;

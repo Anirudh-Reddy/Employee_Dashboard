@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import employeeStaticData from '../../models/employees.json';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { UtilService } from '../../services/util.service';
 import { UserService } from '../../services/user.service';
 
@@ -17,7 +16,6 @@ export class HomeComponent implements OnInit {
   });
 
   public employeeList: any[] = [];
-  public isLoading :boolean = false;
   public selectedEmployeeData:any={};
   public retrievedFiles:any
   public documentObj = {
@@ -39,9 +37,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.userService.getAllUsers().subscribe(res=>{
       this.employees = res.map((emp:any)=>({...emp,...this.documentObj}));
-    })
-    this.utilService.handleServiceCallObservable$.subscribe((res:boolean)=>{
-      this.isLoading = res;
     })
   }
 
