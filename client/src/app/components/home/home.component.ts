@@ -46,7 +46,7 @@ export class HomeComponent implements OnInit {
   }
 
   filterEmployees(event: any) {
-      this.employeeList = this.employees?.filter(emp=>emp.employeeName.toLowerCase().indexOf(event.query.toLowerCase())>-1)
+    this.employeeList = this.employees?.filter(emp=>emp.employeeName.toLowerCase().indexOf(event.query.toLowerCase())>-1)
   }
 
   onSubmit(){

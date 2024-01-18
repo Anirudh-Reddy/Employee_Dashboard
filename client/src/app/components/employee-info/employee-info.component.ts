@@ -39,8 +39,10 @@ export class EmployeeInfoComponent implements OnInit{
 
   ngOnInit(): void {
     this.selectedEmployeeData = this.utilService.getSelectedEmpData();
-    this.selectedEmployeeData.DOB = this.formatDate(this.selectedEmployeeData.DOB);
-    this.employeeForm.patchValue(this.selectedEmployeeData);
+    if(this.selectedEmployeeData){
+      this.selectedEmployeeData.DOB = this.formatDate(this.selectedEmployeeData.DOB);
+      this.employeeForm.patchValue(this.selectedEmployeeData);
+    }
   }
 
   formatDate(date: string): string {
@@ -54,9 +56,12 @@ export class EmployeeInfoComponent implements OnInit{
 
   makeFormEditable(){
     if(this.isFormEditable){
-      if(this.employeeForm.valid){
+      if(this.employeeForm.valid && this.employeeForm.touched){
         this.onSubmitForm();
       }
+      this.utilService.formSaved = true;
+    }else{
+      this.utilService.formSaved = false;
     }
     this.isFormEditable = !this.isFormEditable;
     this.formAction = this.isFormEditable ? "Save" : "Edit";
@@ -71,7 +76,5 @@ export class EmployeeInfoComponent implements OnInit{
       console.log("user created : ",res);
       this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Form updated successfully!!' });
     })
-
-
   }
 }

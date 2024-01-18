@@ -10,6 +10,7 @@ export class UtilService {
   public selectedEmployee :any= {};
   public employeeDocsData = {};
   public isUserUpdated:boolean=false;
+  public isformSaved:boolean=true;
   private handleServiceCall$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false); 
   public handleServiceCallObservable$: Observable<boolean> = this.handleServiceCall$.asObservable();
   constructor(private router: Router, private fileUploadService : FileUploadService) { }
@@ -19,7 +20,7 @@ export class UtilService {
   }
 
   getSelectedEmpData(){
-    if(Object.keys(this.selectedEmployee).length){
+    if(this.selectedEmployee!==null && Object.keys(this.selectedEmployee).length){
       return this.selectedEmployee;
     }else{
       const data:any = typeof window !== 'undefined' ? localStorage.getItem("selected-emp") : null
@@ -32,7 +33,7 @@ export class UtilService {
   }
 
   getEmpDocs(){
-    if(Object.keys(this.employeeDocsData).length){
+    if(this.employeeDocsData!==null && Object.keys(this.employeeDocsData).length){
       return this.employeeDocsData;
     }else{
       const data:any = typeof window !== 'undefined' ? localStorage.getItem("emp-docs") : null
@@ -46,6 +47,14 @@ export class UtilService {
 
   get isUpdated(){
     return this.isUserUpdated;
+  }
+
+  set formSaved(val:boolean){
+    this.isformSaved = val;
+  }
+
+  get formSaved(){
+    return this.isformSaved;
   }
 
   handleServiceCall(flag:boolean){

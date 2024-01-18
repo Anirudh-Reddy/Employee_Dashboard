@@ -28,6 +28,7 @@ export class UploadDocsComponent implements OnInit{
     "Payslips" : []
   };
   public isLoading:boolean = false;
+  public isDocsUploaded:boolean = true;
   constructor(
     private messageService: MessageService, 
     private utilService:UtilService,
@@ -37,7 +38,7 @@ export class UploadDocsComponent implements OnInit{
   
   ngOnInit(): void {
     this.selectedEmpData = this.utilService.getSelectedEmpData();
-    this.retrievedFiles = Object.keys(this.utilService.getEmpDocs()).length ? this.utilService.getEmpDocs() : this.selectedFiles;
+    this.retrievedFiles = this.utilService.getEmpDocs()!==null && Object.keys(this.utilService.getEmpDocs()).length ? this.utilService.getEmpDocs() : this.selectedFiles;
     this.handleRetrievedFilesData();
     this.utilService.handleServiceCallObservable$.subscribe((res:boolean)=>{
       this.isLoading = res;
@@ -47,10 +48,7 @@ export class UploadDocsComponent implements OnInit{
   handleRetrievedFilesData(){
     Object.keys(this.selectedFiles).forEach(key=>{
       if(this.retrievedFiles[key].length){
-        console.log('this.retrievedFiles : ',this.retrievedFiles)
-        console.log('this.selectedEmpData : ',this.selectedEmpData)
         this.retrievedFiles[key].forEach((file:any)=>{
-          debugger
           const filesExists = this.selectedEmpData.documents[key].find((fl:any)=>fl.originalname || fl.name == file.originalname);
           if(!filesExists) this.selectedEmpData.documents[key].push(file);
         })
@@ -64,6 +62,7 @@ export class UploadDocsComponent implements OnInit{
     let fileExists = this.uploadedFiles.find((eachFile:any)=>eachFile.name==file.name);
     if(!fileExists){
       this.uploadedFiles.push(file);
+      this.isDocsUploaded = false;
       this.selectedFiles[fileType].push(event.target.files[0].name)
       this.selectedEmpData.documents[fileType].push(event.target.files[0]);
     }else{
@@ -97,9 +96,21 @@ export class UploadDocsComponent implements OnInit{
         window.scrollTo(0,0);
       });
     }
+    this.isDocsUploaded = true;
   }
 
   openDocs(){
-    this.utilService.handleFileRetrieving('employee-docs');
+    if(!this.isDocsUploaded){
+      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please click on submit to upload the documents!!' });
+    }else if(!this.utilService.formSaved){
+      this.messageService.add({ severity: 'warn', summary: 'Warning', detail: 'Please save the form!!' });
+    }else{
+      this.utilService.handleFileRetrieving('employee-docs');
+    }
+  }
+
+  handleFormAndUploadChanges(route:string){
+    this.handleFormAndUploadChanges('employee-docs');
+    this.handleFormAndUploadChanges('employeeInfo');
   }
 }
