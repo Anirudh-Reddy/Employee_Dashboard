@@ -38,6 +38,8 @@
 
 .home_spinner{
     position: fixed;
-    top: 30%;
-    right: 45%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
 }

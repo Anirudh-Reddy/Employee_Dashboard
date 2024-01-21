@@ -10,8 +10,10 @@
                 <p-button label="Search" [disabled]="false" (click)="onSubmit()"></p-button>
             </div>
         </form>
-        <!-- <div class="home_spinner" *ngIf="isLoading">
-            <p-progressSpinner></p-progressSpinner>
-        </div> -->
+        <div class="overlay"  *ngIf="isLoading">
+            <div class="home_spinner">
+                <p-progressSpinner></p-progressSpinner>
+            </div>
+        </div>
     </div>
 </div>

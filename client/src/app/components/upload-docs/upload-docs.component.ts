@@ -21,7 +21,7 @@ export class UploadDocsComponent implements OnInit{
   public submitFlag:boolean=true;
   public retrievedFiles:any;
   public toUpdate:boolean=false;
-  public uploadedFileNames:any = {
+  public assignvalues:any = {
     "Visa" : [],
     "Transcripts" : [],
     "IDs" : [],
@@ -38,7 +38,7 @@ export class UploadDocsComponent implements OnInit{
   
   ngOnInit(): void {
     this.selectedEmpData = this.utilService.getSelectedEmpData();
-    this.retrievedFiles = this.utilService.getEmpDocs()!==null && Object.keys(this.utilService.getEmpDocs()).length ? this.utilService.getEmpDocs() : this.selectedFiles;
+    this.retrievedFiles = this.utilService.getEmpDocs()!==null && Object.keys(this.utilService.getEmpDocs()).length ? this.utilService.getEmpDocs() : this.assignvalues;
     this.handleRetrievedFilesData();
     this.utilService.handleServiceCallObservable$.subscribe((res:boolean)=>{
       this.isLoading = res;
@@ -59,7 +59,7 @@ export class UploadDocsComponent implements OnInit{
   onFileChange(event: any, fileType:string) {
     this.submitFlag = false;
     let file = event.target.files[0];
-    let fileExists = this.uploadedFiles.find((eachFile:any)=>eachFile.name==file.name);
+    let fileExists = this.uploadedFiles.length && (this.uploadedFiles.find((eachFile:any)=>eachFile.name==file.name) || this.isFileAlreadyUploaded(file));
     if(!fileExists){
       this.uploadedFiles.push(file);
       this.isDocsUploaded = false;
@@ -68,6 +68,12 @@ export class UploadDocsComponent implements OnInit{
     }else{
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'File Already Exists!!' });
     }
+  }
+
+  isFileAlreadyUploaded(file: any): boolean {
+    return Object.keys(this.retrievedFiles).some(key =>
+      this.retrievedFiles[key].some((fl: any) => fl.originalname === file.name)
+    );
   }
 
   onBackClick(){
@@ -123,5 +129,39 @@ export class UploadDocsComponent implements OnInit{
   handleFormAndUploadChanges(route:string){
     this.handleFormAndUploadChanges('employee-docs');
     this.handleFormAndUploadChanges('employeeInfo');
+  }
+
+  removeFile(file:any,fileType:string,id:string){
+    if(file.name!==undefined && !this.submitFlag){
+      this.handleRemoveFile(file,fileType);
+    }else{
+      const payload = {
+        filename : file.originalname || file.name,
+        id : id,
+        fileType : fileType
+      }
+      this.fileUploadService.removeFile(payload).subscribe(() => {
+        console.log('File removed successfully from the server:', file);
+        this.handleRemoveFile(file,fileType);
+      }, (error) => {
+        console.error('Failed to remove file from the server:', error);
+      });
+    }
+    this.submitFlag = this.uploadedFiles.length ? false : true;
+  }
+  handleRemoveFile(file:any,fileType:string){
+    let selectedEmpDataIdx = this.selectedEmpData.documents[fileType].findIndex((emp:any)=>emp.name === file.name);
+    if(selectedEmpDataIdx>-1){
+      this.selectedEmpData.documents[fileType].splice(selectedEmpDataIdx,1);
+    }
+    let uploadedFileIdx =  this.uploadedFiles.findIndex((uploadedFile: any) => uploadedFile.name === file.name);
+    if (uploadedFileIdx > -1) {
+      this.uploadedFiles.splice(uploadedFileIdx, 1);
+    }
+    let retrievedFileIdx = this.retrievedFiles[fileType].findIndex((fl:any)=>fl.originalname == file.name);
+        if(retrievedFileIdx>-1){
+          this.retrievedFiles[fileType].splice(retrievedFileIdx,1);
+    }
+    localStorage.setItem("emp-docs",JSON.stringify(this.retrievedFiles));
   }
 }

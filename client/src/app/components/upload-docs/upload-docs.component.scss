@@ -35,7 +35,8 @@ input[type="file"] {
     outline: none;
     padding: 4px;
     margin: -4px;
-  }
+    overflow: hidden;
+}
   
   input[type="file"]:focus-within::file-selector-button,
   input[type="file"]:focus::file-selector-button {
@@ -108,6 +109,30 @@ input[type="file"] {
 .uploaded_files{
   width: 50%;
   overflow: hidden;
+  ul{
+    list-style-type: none;
+    padding: 0;
+    width: 100%;
+    li{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .file_title{
+        width: 95%;
+        overflow: hidden;
+      }
+      .pi-trash{
+        width: 5%;
+        color: red;
+        margin-left: 10px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.pi-trash:hover{
+  font-weight: 600;
 }
 
 .uploadDocs_spinner{
@@ -125,4 +150,23 @@ input[type="file"] {
 .uploadDocs_info_container{
   display: flex;
   align-items: center;
+}
+
+.removeFile{
+  transform: rotate();
+}
+
+
+
+@media (max-width: 700px) {
+  .doc1{
+      flex-direction: column;
+      input{
+        width: 100%;
+      }
+      .uploaded_files{
+        width: 100%;
+        padding: 8px;
+      }
+  }
 }

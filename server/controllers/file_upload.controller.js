@@ -1,5 +1,11 @@
 import fileUploadModel from "../models/file_upload.model.js";
+import path from 'path';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs'
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const handleFileUpload=async(req,res)=>{
     try{
         let files = {}
@@ -42,21 +48,14 @@ const updateFiles = async (req,res)=>{
             files = handleFilesData(doc_files.selectedFiles,req.files)
         }
         const userId = doc_files.userId;
-
         const user = await fileUploadModel.findOne({ id: userId });
-
         if(user){
-
             Object.keys(files).forEach(key=>{
                 if(files[`${key}`].length){
                     user.files[`${key}`].push(...files[`${key}`])
                 }
             })
-
-
         }
-        console.log('updated val : ',user)
-
         const updateUser = await fileUploadModel.updateOne({ id : userId }, { files: user.files });
         res.status(200).json({ id: user.id, message: 'file updated successfully' });
     } catch (error) {
@@ -84,8 +83,31 @@ function handleFilesData(doc_files,files){
     return new_doc_files;
 }
 
+const removeFile = async (req, res) => {
+    try {
+      const fileObj = req.body
+      const user = await fileUploadModel.findOne({ id: fileObj.id });
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      const fileToRemoveIdx = user.files[fileObj.fileType].findIndex(file => file.originalname === fileObj.filename);
+      if (fileToRemoveIdx == -1) {
+        return res.status(404).json({ message: 'File not found' });
+      }
+      const filePath = path.join(__dirname, '../files', user.files[fileObj.fileType][fileToRemoveIdx].filename)
+      fs.unlinkSync(filePath);
+      user.files[fileObj.fileType].splice(fileToRemoveIdx,1);
+      await fileUploadModel.updateOne({ id : fileObj.id }, { files: user.files });
+      res.status(200).json({ message: 'Files removed successfully' });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  };
+
+
 export {
     handleFileUpload,
     retrieveFiles,
-    updateFiles
+    updateFiles,
+    removeFile
 }

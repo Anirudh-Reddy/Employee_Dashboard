@@ -73,7 +73,6 @@ export class EmployeeInfoComponent implements OnInit{
 
   onSubmitForm(){
     this.userService.updateUser(this.selectedEmployeeData._id,this.employeeForm.value).subscribe(res=>{
-      console.log("user created : ",res);
       this.messageService.add({ severity: 'success', summary: 'Updated', detail: 'Form updated successfully!!' });
     })
   }

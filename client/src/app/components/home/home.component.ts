@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   employeeForm: FormGroup = this.fb.group({
     selectedEmployee :[""],
   });
-
+  public isLoading:boolean = false;
   public employeeList: any[] = [];
   public selectedEmployeeData:any={};
   public retrievedFiles:any
@@ -35,8 +35,13 @@ export class HomeComponent implements OnInit {
      ) {}
 
   ngOnInit() {
+    this.utilService.handleServiceCallObservable$.subscribe((res:boolean)=>{
+      this.isLoading = res;
+    })
+    this.utilService.handleServiceCall(true);
     this.userService.getAllUsers().subscribe(res=>{
       this.employees = res.map((emp:any)=>({...emp,...this.documentObj}));
+      this.utilService.handleServiceCall(false);
     })
   }
 

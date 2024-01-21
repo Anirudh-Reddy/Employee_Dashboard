@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FileUploadService {
-   public base_URL = 'https://employee-dashboard-0msz.onrender.com'
- // public base_URL = 'http://localhost:3000'
+  //public base_URL = 'https://employee-dashboard-0msz.onrender.com'
+ public base_URL = 'http://localhost:3000'
 
   constructor(private http : HttpClient) { }
   uploadFiles(files:FormData):Observable<any>{
@@ -20,6 +20,17 @@ export class FileUploadService {
   
   updateFiles(files:FormData):Observable<any>{
     return this.http.post<any>(`${this.base_URL}/uploadFiles/update`, files);
+  }
+
+  removeFile(requestBody:any):Observable<any>{
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: requestBody,
+    };
+  
+    return this.http.delete<any>(`${this.base_URL}/uploadFiles/delete`, options);
   }
 
 }

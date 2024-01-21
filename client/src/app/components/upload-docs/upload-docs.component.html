@@ -33,7 +33,10 @@
                     <input type="file" (change)="onFileChange($event,'Visa')" multiple />
                     <div class="uploaded_files">
                         <ul>
-                            <li *ngFor="let Vfile of selectedEmpData?.documents?.['Visa']">{{Vfile.name || Vfile.originalname}}</li>
+                            <li *ngFor="let Vfile of selectedEmpData?.documents?.['Visa']">
+                                <span class="file_title">{{Vfile.name || Vfile.originalname}}</span>
+                                <span class="pi pi-trash" (click)="removeFile(Vfile,'Visa', selectedEmpData.id)"></span>
+                            </li>
                         </ul>
                     </div>
                 </div>                
@@ -54,7 +57,10 @@
                     <input type="file" (change)="onFileChange($event,'IDs')" multiple />
                     <div class="uploaded_files">
                         <ul>
-                            <li *ngFor="let IDfile of selectedEmpData?.documents?.['IDs']">{{IDfile.name || IDfile.originalname}}</li>
+                            <li *ngFor="let IDfile of selectedEmpData?.documents?.['IDs']">
+                                <span class="file_title">{{IDfile.name || IDfile.originalname}}</span>
+                                <span class="pi pi-trash" (click)="removeFile(IDfile,'IDs', selectedEmpData.id)"></span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -76,7 +82,10 @@
                     <input type="file" (change)="onFileChange($event,'Transcripts')" multiple />
                     <div class="uploaded_files">
                         <ul>
-                            <li *ngFor="let Tfile of selectedEmpData?.documents?.['Transcripts']">{{Tfile.name || Tfile.originalname}}</li>
+                            <li *ngFor="let Tfile of selectedEmpData?.documents?.['Transcripts']">
+                                <span class="file_title">{{Tfile.name || Tfile.originalname}}</span>
+                                <span class="pi pi-trash" (click)="removeFile(Tfile,'Transcripts', selectedEmpData.id)"></span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -98,7 +107,10 @@
                     <input type="file" (change)="onFileChange($event,'Payslips')" multiple />
                     <div class="uploaded_files">
                         <ul>
-                            <li *ngFor="let Pfile of selectedEmpData?.documents?.['Payslips']">{{Pfile.name || Pfile.originalname}}</li>
+                            <li *ngFor="let Pfile of selectedEmpData?.documents?.['Payslips']">
+                                <span class="file_title">{{Pfile.name || Pfile.originalname}}</span>
+                                <span class="pi pi-trash" (click)="removeFile(Pfile,'Payslips', selectedEmpData.id)"></span>
+                            </li>
                         </ul>
                     </div>
                 </div>
