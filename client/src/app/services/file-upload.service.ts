@@ -6,8 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FileUploadService {
-  //public base_URL = 'https://employee-dashboard-0msz.onrender.com'
- public base_URL = 'http://localhost:3000'
+  public base_URL = 'https://employee-dashboard-0msz.onrender.com'
+//public base_URL = 'http://localhost:3000'
 
   constructor(private http : HttpClient) { }
   uploadFiles(files:FormData):Observable<any>{
